@@ -114,7 +114,28 @@ create table orderTable(
 
 - 기본키에 입력되는 값은 중복될 수 없으며, null값이 입력될 수 없다
   기본키로 생성한 것은 자동으로 클러스터링 인덱스가 생성된다
- - 외래키 
+- 외래키 제약조건은 show index from order 문으로 확인할 수 있다
+  외래키 옵션 중에 on delete cascade, on update cascade는 기존 테이블의 데이터가 변경되었을 때 외래키 테이블도 자동으로 적용되도록 해 준다
+- unique 제약조건은 중복되지 않는 유일한 값을 입력해야 한다 unique는 null을 허용. 대체키(alternate key)라고도 부름
+- check 제약조건은 입력되는 데이터를 점검하는 기능
+-default 는 값을 입력하지 않았을 때 자동으로 입력되는 값을 정의하는 방법
+- null, not null
+
+-- 제약 조건 
+create table customer
+(
+   customerID char(4) not null primary key,
+    name varchar(10) not null unique,
+    addr char(2) default '서울',
+    mobile char(13) null,
+    constraint ck_addr check (addr is not null)
+);
+insert into customer values('C100', '이만수', default, '010-1111-111');
+insert into customer values('C200', '김일범', '경남', '010-2222-2222');
+insert into customer values('C300', '김경자', '전남', '010-3333-3333');
+insert into customer values('C400', '조영희', '경기', '010-4444-4444');
+insert into customer values('C500', '백태영', default, '010-5555-5555');
+insert into customer values('C600', '윤종찬', '전남', null);
 
 
 
