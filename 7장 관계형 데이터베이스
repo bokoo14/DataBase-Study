@@ -136,10 +136,3 @@ insert into customer values('C300', '김경자', '전남', '010-3333-3333');
 insert into customer values('C400', '조영희', '경기', '010-4444-4444');
 insert into customer values('C500', '백태영', default, '010-5555-5555');
 insert into customer values('C600', '윤종찬', '전남', null);
-
-
-
-
-
-
-
