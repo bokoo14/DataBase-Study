@@ -169,6 +169,6 @@ create index idx_course_year_cid on course(year, cid);
 
 -- 인덱스 삭제하기: 보조 인덱스를 먼저 삭제하는 것이 좋다
 보조 인덱스는 alter table로 삭제해도 된다.
-primary key는 drop index
+primary key는 drop index로 삭제되지 않고, alter table로만 삭제할 수 있다
 drop index idx_course_year on course;
 alter table course drop primary key;
