@@ -66,14 +66,55 @@
 유일성 (O)
 최소성 (X)
 
+**********
 ## 외래키 (foreign key)
 한 릴레이션의 애트리뷰트(외래키)는 다른 릴레이션의 기본키를 참조
 외래키는 다른 릴레이션에서 기본키로 존재해 있어야만 함
 
 - R!=S인 경우
 기본키는 밑줄을 그어 표시
-- R=S인 경우
+- R=S인 경우(테이블이 하나인 경우)
+외래키가 속한 릴레이션과 기본키가 속한 릴레이션이 반드시 달라야 할 필요는 없다
 
+## 무결성 제약조건 - 개체 무결성 제약조건, 참조 무결성 제약조건
+- 개체 무결성 제약조건: 기본키에 속해 있는 애트리뷰트는 널값이나 중복값을 가질 수 없다
+- 참조 무결성 제약조건: 릴레이션은 참조할 수 없는 외래키 값을 가질 수 없다
+
+데이터베이스가 삽입, 삭제, 변경 등의 연산을 통해 변경되어도 무결성 제약조건이 유지되어야 함
+
+----------------------------------------
+실습
+-- 기본키 선언
+create table student(
+...,
+primary key(sno);
+);
+
+-- 외래키 선언 
+create table enroll(
+...,
+foriegn key(sno) references student(sno);
+);
+
+-- 애트리뷰트 값 삽입
+insert into student values(....);
+
+-- 제약 조건
+create table orderTable(
+   num smallint auto_increment, -- num열을 auto_increment를 설정 
+   customerID char(4),
+   itemName char(10),
+   price int,
+   counting smallint,
+   
+   primary key(num), -- auto_increment열을 지정한 열은 반드시 primary나 unique로 지정해줘야 한다
+   foreign key(customerID) references customer(customerID), -- customer테이블의 customrtID열과 외래키 관계를 맺어라
+   constraint ck_counting check(counting > 0) -- 수량은 0보다 크다
+);
+
+- 기본키에 입력되는 값은 중복될 수 없으며, null값이 입력될 수 없다
+  기본키로 생성한 것은 자동으로 클러스터링 인덱스가 생성된다
+ - 외래키 
 
 
 
