@@ -148,3 +148,30 @@ slot: 한 개의 레코드를 저장할 수 있는 공간. n개의 슬롯이 모
 collision: 레코드를 삽입할 때 2개의 상이한 레코드가 똑같은 버킷으로 해싱되는 것
 
 ---------------------------------------
+실습
+-- index 생성
+create index idx_student_sname on student(sname);
+
+-- index 삭제
+alter table student drop index idx_student_sname;
+
+-- 과목명 열을 primary key로 지정: 기본인덱스/클러스터링 인덱스로 저장. Key_name은 Primary. index_type은 BTREE로 구성
+alter table course add constraint pk_name primary key(cname);
+
+-- 단순 보조 인덱스 생성: Non_unique=1 중복을 허용
+create index idx_course_year on course(year);
+
+-- 고유 보조 인덱스 생성: Non_unique=0 중복을 허용하지 않음
+create unique index idx_course_cid in course(cid);
+
+-- 학년과 과목코드를 조합하여 인덱스 생성: 두 열이 하나의 인덱스로 설정
+create index idx_course_year_cid on course(year, cid);
+
+-- 인덱스 삭제하기: 보조 인덱스를 먼저 삭제하는 것이 좋다
+
+
+
+
+
+
+
