@@ -68,10 +68,50 @@ R의 차수가 (m+n)이고 S의 차수가 n이면 R÷S = (m+n) ÷ n = m의 차�
 
 ---------------------------------------------------------
 실습
+— database사용
+create database test;
+use test;
 
+— select 문
+select * from student;
+select sname from student; — project
+select sname, sdept from student;
+select * from student where sdept = “컴퓨터”;  — select 
+select * from course where credit >= 3;
+select * from course where year = 2 or year = 3;
+select * from course where credit = 3 and year = 3;
 
+—join
+: 두 개 이상의 테이블이 서로 연관되어 있는 상태 고려
 
+— inner join
+조인 중에서 가장 많이 사용되는 조인
+일반적으로 join이라 하면 inner join을 사용한 것
+select * from enroll inner join student on enroll.sno = student.sno;  수강테이블과 학생테이블 결합
+select sname, stel from enroll inner join student on enroll.sno = student.sno where grade = “A0”;
 
+— outer join
+조인의 조건에 만족되지 않는 행까지도 포함
+자주 사용되는 것은 아니지만 가끔 유용하게 사용되는 방식
+left outer join: 왼쪽 테이블의 것은 모두 출력되어야 한다
+right outer join
+full outer join
+select student.sno, sname, code, grade from student left outer join enroll on enroll.sno = student.sno;
+
+— cross join
+한쪽 테이블의 모든 행들과 다른 쪽 테이블의 모든 행을 조인시키는 기능 
+cross join의 결과 개수는 두 테이블 개수를 곱한 개수가 된다
+이러한 cross join을 “카티션 프로덕트( X )”라고 부른다
+차수: 두 차수의 합
+카디널리티: 두 카디널리티의 곱
+cross join에는 on구문을 사용할 수 없다 - cross join을 하기 위해서는 from절에 단지 콤마로 이름들을 나열한다
+select * from student cross join enroll;
+select * from student, enroll;
+
+cross join의 용도는 테스트를 위해 주로 사용
+실 업무에서 사용은 별로 권장 사항이 아니다
+cross join에서 inner join과 같은 결과를 보고 싶으면 where절을 써야 한다
+select * from student, enroll where studnet.sno = enroll.sno;
 
 
 
