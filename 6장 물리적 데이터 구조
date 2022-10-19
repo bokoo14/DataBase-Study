@@ -162,16 +162,13 @@ alter table course add constraint pk_name primary key(cname);
 create index idx_course_year on course(year);
 
 -- 고유 보조 인덱스 생성: Non_unique=0 중복을 허용하지 않음
-create unique index idx_course_cid in course(cid);
+create unique index idx_course_cid on course(cid);
 
 -- 학년과 과목코드를 조합하여 인덱스 생성: 두 열이 하나의 인덱스로 설정
 create index idx_course_year_cid on course(year, cid);
 
 -- 인덱스 삭제하기: 보조 인덱스를 먼저 삭제하는 것이 좋다
-
-
-
-
-
-
-
+보조 인덱스는 alter table로 삭제해도 된다.
+primary key는 drop index
+drop index idx_course_year on course;
+alter table course drop primary key;
